@@ -6,7 +6,7 @@ const { BadRequest } = require('../utils/errors/BadRequestError');
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
-    .then((movies) => res.send(movie))
+    .then((movies) => res.send(movies))
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
         next(new BadRequest('Переданы некорректные данные'));
@@ -17,11 +17,30 @@ module.exports.getMovies = (req, res, next) => {
 };
 module.exports.createMovie = (req, res, next) => {
   const {
-    country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId,
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    nameRU,
+    nameEN,
+    thumbnail,
   } = req.body;
   const owner = req.user._id;
   Movie.create({
-    country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, owner,
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    nameRU,
+    nameEN,
+    thumbnail,
+    owner,
   })
     .then((movie) => {
       res.send(movie);
@@ -38,9 +57,7 @@ module.exports.createMovie = (req, res, next) => {
 module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params.id)
     .orFail(new NotFoundError('Фильма с таким айди не существует'))
-    .then((movie) => {
-      return movie.remove({ _id: req.params.id })
-        .then((removedMovie) => res.send(removedMovie));
-    })
+    .then((movie) => movie.remove({ _id: req.params.id }))
+    .then((removedMovie) => res.send(removedMovie))
     .catch(next);
 };

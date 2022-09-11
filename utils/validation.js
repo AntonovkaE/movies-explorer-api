@@ -56,7 +56,7 @@ module.exports.validateCreateMovie = celebrate({
         .pattern(imgUrlRegExp),
       owner: Joi.string().length(24).hex(),
       movieId: Joi.string().length(24).hex(),
-      nameRU: Joi.string()
+      nameRU: Joi.string(),
     }),
 });
 

@@ -1,12 +1,12 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const {
   NotFoundError,
 } = require('../utils/errors/NotFoundError');
 const { BadRequest } = require('../utils/errors/BadRequestError');
 const { ConflictError } = require('../utils/errors/ConflictError');
-const bcrypt = require('bcrypt');
 const { Unauthorized } = require('../utils/errors/UnauthorizedError');
-const jwt = require('jsonwebtoken');
 
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
@@ -39,7 +39,6 @@ module.exports.updateUser = (req, res, next) => {
       }
     });
 };
-
 
 module.exports.createUser = (req, res, next) => {
   const {
@@ -78,8 +77,6 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      console.log(email, password)
-
       const token = jwt.sign({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
       res.send({ token });
     })
@@ -87,5 +84,3 @@ module.exports.login = (req, res, next) => {
       next(new Unauthorized('Неправильные почта или пароль'));
     });
 };
-
-
