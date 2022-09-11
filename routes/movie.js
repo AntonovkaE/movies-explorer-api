@@ -1,8 +1,10 @@
-const router = require('express').Router();
-const { validateUpdateUser } = require('../utils/validation');
-const { getUser, updateUser } = require('../controllers/user');
+const router = require('express')
+  .Router();
+const { validateId, validateCreateMovie } = require('../utils/validation');
+const { getMovies, deleteMovie, createMovie } = require('../controllers/movie');
 
-router.get('/me', getUser);
-router.patch('/me', validateUpdateUser, updateUser);
+router.get('/', getMovies);
+router.delete('/:id', validateId, deleteMovie);
+router.post('/', validateCreateMovie, createMovie);
 
 module.exports = router;

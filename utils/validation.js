@@ -8,16 +8,29 @@ module.exports.validateId = celebrate({
   }),
 });
 
-module.exports.validateCreateCard = celebrate({
+module.exports.validateCreateMovie = celebrate({
   body: Joi.object()
     .keys({
       name: Joi.string()
         .required()
         .min(2)
         .max(30),
-      link: Joi.string()
+      director: Joi.string().required(),
+      duration: Joi.number().required(),
+      year: Joi.number().required(),
+      description: Joi.string().required(),
+      image: Joi.string()
         .required()
         .pattern(imgUrlRegExp),
+      trailerLink: Joi.string()
+        .required()
+        .pattern(imgUrlRegExp),
+      thumbnail: Joi.string()
+        .required()
+        .pattern(imgUrlRegExp),
+      owner: Joi.string().length(24).hex(),
+      movieId: Joi.string().length(24).hex(),
+      nameRU: Joi.string()
     }),
 });
 

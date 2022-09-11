@@ -2,10 +2,9 @@ const Movie = require('../models/movie');
 const {
   NotFoundError,
 } = require('../utils/errors/NotFoundError');
-const { ForbiddenError } = require('../utils/errors/ForbiddenError');
 const { BadRequest } = require('../utils/errors/BadRequestError');
 
-module.exports.gitMovies = (req, res, next) => {
+module.exports.getMovies = (req, res, next) => {
   Movie.find({})
     .then((movies) => res.send(movie))
     .catch((err) => {
