@@ -3,9 +3,6 @@ const {
   NotFoundError,
 } = require('../utils/errors/NotFoundError');
 const { BadRequest } = require('../utils/errors/BadRequestError');
-const { Unauthorized } = require('../utils/errors/UnauthorizedError');
-const { ConflictError } = require('../utils/errors/ConflictError');
-
 
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
