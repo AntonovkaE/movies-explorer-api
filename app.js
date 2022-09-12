@@ -13,17 +13,17 @@ const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { NotFoundError } = require('./utils/errors/NotFoundError');
 
-const { errorHandler } = require('./utils/errors/errorHandler');
+const { errorHandler } = require('./middlewares/errorHandler');
 const { limiter } = require('./middlewares/limiter');
+const { localBase, notFoundMessage } = require('./utils/constances');
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, MONGO_BASE } = process.env;
 
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/moviedb');
-
+mongoose.connect(process.env.NODE_ENV !== 'production' ? localBase : MONGO_BASE);
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -43,7 +43,7 @@ app.use('/users', require('./routes/user'));
 app.use('/movies', require('./routes/movie'));
 
 app.use('/', () => {
-  throw new NotFoundError('Страница не найдена');
+  throw new NotFoundError(notFoundMessage);
 });
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());

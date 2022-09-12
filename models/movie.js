@@ -61,7 +61,7 @@ const movieSchema = new mongoose.Schema({
   },
   movieId: {
     type: Number,
-    // required: true,
+    required: true,
   }
 });
 
