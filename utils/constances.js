@@ -19,5 +19,5 @@ module.exports = {
   badRequestUserMessage,
   conflictEmailMessage,
   wrongUserDataMessage,
-  unauthorizedMessage
+  unauthorizedMessage,
 };
