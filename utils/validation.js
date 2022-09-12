@@ -37,10 +37,11 @@ module.exports.validateId = celebrate({
 module.exports.validateCreateMovie = celebrate({
   body: Joi.object()
     .keys({
-      name: Joi.string()
+      nameEN: Joi.string()
         .required()
         .min(2)
         .max(30),
+      country: Joi.string().required(),
       director: Joi.string().required(),
       duration: Joi.number().required(),
       year: Joi.number().required(),
@@ -55,7 +56,6 @@ module.exports.validateCreateMovie = celebrate({
         .required()
         .pattern(imgUrlRegExp),
       owner: Joi.string().length(24).hex(),
-      movieId: Joi.string().length(24).hex(),
       nameRU: Joi.string(),
     }),
 });

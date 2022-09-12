@@ -47,10 +47,6 @@ const movieSchema = new mongoose.Schema({
     ref: 'user',
     required: true,
   },
-  movieId: {
-    type: Number,
-    required: true,
-  },
   nameEN: {
     type: String,
     required: true,
@@ -63,16 +59,10 @@ const movieSchema = new mongoose.Schema({
     minlength: [2, 'Должно быть минимум 2 символа'],
     maxlength: [30, 'Максимум 30 символов'],
   },
-
-  // likes: [{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'user',
-  //   default: [],
-  // }],
-  // createdAt: {
-  //   type: Date,
-  //   default: Date.now(),
-  // },
+  movieId: {
+    type: Number,
+    // required: true,
+  }
 });
 
 module.exports = mongoose.model('movie', movieSchema);

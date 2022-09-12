@@ -14,7 +14,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { NotFoundError } = require('./utils/errors/NotFoundError');
 
 const { errorHandler } = require('./utils/errors/errorHandler');
-const limiter = require('./middlewares/limeter');
+const { limiter } = require('./middlewares/limiter');
 
 const app = express();
 const { PORT = 3000 } = process.env;
