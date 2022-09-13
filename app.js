@@ -34,6 +34,13 @@ app.use(helmet());
 app.use(requestLogger);
 app.use(limiter);
 
+//удалить
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signin', validateSignIn, login);
 app.post('/signup', validateSignUp, createUser);
 
