@@ -18,7 +18,7 @@ const { limiter } = require('./middlewares/limiter');
 const { localBase, notFoundMessage } = require('./utils/constances');
 
 const app = express();
-const { PORT = 3000, MONGO_BASE } = process.env;
+const { PORT = 3001, MONGO_BASE } = process.env;
 
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true }));
