@@ -8,6 +8,7 @@ const badRequestUserMessage = 'Некорректные данные польз�
 const conflictEmailMessage = 'Пользователь с таким email существует';
 const wrongUserDataMessage = 'Неправильные почта или пароль';
 const unauthorizedMessage = 'Необходима авторизация';
+const forbiddenMessage = 'Нельзя удалять чужую карточку';
 
 module.exports = {
   localBase,
@@ -20,4 +21,5 @@ module.exports = {
   conflictEmailMessage,
   wrongUserDataMessage,
   unauthorizedMessage,
+  forbiddenMessage,
 };
