@@ -26,7 +26,7 @@ module.exports.updateUser = (req, res, next) => {
     name, email,
   }, {
     runValidators: true, new: true,
-  }).orFail(new NotFoundError(notFoundUserMessage)
+  }).orFail(new NotFoundError(notFoundUserMessage))
     .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -34,7 +34,7 @@ module.exports.updateUser = (req, res, next) => {
       } else {
         next(err);
       }
-    }));
+    });
 };
 
 module.exports.createUser = (req, res, next) => {
