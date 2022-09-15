@@ -40,7 +40,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-router.use(require('./routes/index'))
+app.use(require('./routes/index'))
 
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());

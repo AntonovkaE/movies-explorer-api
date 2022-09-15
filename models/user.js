@@ -4,10 +4,10 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   name: {
+    required: true,
     type: String,
     minlength: [2, 'Должно быть минимум 2 символа'],
     maxlength: [30, 'Максимум 30 символов'],
-    default: 'Elvira',
   },
   email: {
     type: String,
