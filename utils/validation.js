@@ -13,13 +13,13 @@ module.exports.validateSignUp = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
-    name: Joi.string().min(2).max(30).default('Ella'),
+    name: Joi.string().min(2).max(30).default('Ella').required(),
   }),
 });
 
 module.exports.validateId = celebrate({
   params: Joi.object().keys({
-    id: Joi.string().length(24).hex(),
+    id: Joi.string().length(24).hex().required(),
   }),
 });
 
@@ -34,9 +34,9 @@ module.exports.validateCreateMovie = celebrate({
     image: Joi.string().required().pattern(imgUrlRegExp),
     trailerLink: Joi.string().required().pattern(imgUrlRegExp),
     thumbnail: Joi.string().required().pattern(imgUrlRegExp),
-    owner: Joi.string().length(24).hex(),
-    nameRU: Joi.string(),
-    movieId: Joi.string(),
+    owner: Joi.string().length(24).hex().required(),
+    nameRU: Joi.string().required(),
+    movieId: Joi.number().required(),
   }),
 });
 
