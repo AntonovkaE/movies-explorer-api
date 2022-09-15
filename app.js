@@ -34,24 +34,14 @@ app.use(helmet());
 app.use(requestLogger);
 app.use(limiter);
 
-//удалить
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
 
-app.post('/signin', validateSignIn, login);
-app.post('/signup', validateSignUp, createUser);
+router.use(require('./routes/index'))
 
-app.use(auth);
-app.use('/users', require('./routes/user'));
-
-app.use('/movies', require('./routes/movie'));
-
-app.use('/', () => {
-  throw new NotFoundError(notFoundMessage);
-});
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());
 app.use(errorHandler);

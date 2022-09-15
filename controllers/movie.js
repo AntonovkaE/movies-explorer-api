@@ -4,7 +4,9 @@ const {
 } = require('../utils/errors/NotFoundError');
 
 const { BadRequest } = require('../utils/errors/BadRequestError');
-const { badRequestMessage, badRequestFilmMessage, notFoundFilmMessage, forbiddenMessage } = require('../utils/constances');
+const {
+  badRequestMessage, badRequestFilmMessage, notFoundFilmMessage, forbiddenMessage,
+} = require('../utils/constances');
 const { ForbiddenError } = require('../utils/errors/ForbiddenError');
 
 module.exports.getMovies = (req, res, next) => {
@@ -64,9 +66,10 @@ module.exports.deleteMovie = (req, res, next) => {
     .orFail(new NotFoundError(notFoundFilmMessage))
     .then((movie) => {
       if (String(movie.owner) !== req.user._id) {
-        throw new ForbiddenError(forbiddenMessage)
+        throw new ForbiddenError(forbiddenMessage);
       }
-      return movie.remove({ _id: req.params.id })})
+      return movie.remove({ _id: req.params.id });
+    })
     .then((removedMovie) => res.send(removedMovie))
     .catch(next);
 };
