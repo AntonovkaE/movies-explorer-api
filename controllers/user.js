@@ -29,6 +29,9 @@ module.exports.updateUser = (req, res, next) => {
   }).orFail(new NotFoundError(notFoundUserMessage))
     .then((user) => res.status(200).send(user))
     .catch((err) => {
+      if (err.code === 11000) {
+        next(new ConflictError(conflictEmailMessage));
+      }
       if (err.name === 'ValidationError') {
         next(new BadRequest(badRequestUserMessage));
       } else {
