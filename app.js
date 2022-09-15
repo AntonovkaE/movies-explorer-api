@@ -7,15 +7,11 @@ const helmet = require('helmet');
 const {
   errors,
 } = require('celebrate');
-const { validateSignIn, validateSignUp } = require('./utils/validation');
-const { login, createUser } = require('./controllers/user');
-const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { NotFoundError } = require('./utils/errors/NotFoundError');
 
 const { errorHandler } = require('./middlewares/errorHandler');
 const { limiter } = require('./middlewares/limiter');
-const { localBase, notFoundMessage } = require('./utils/constances');
+const { localBase } = require('./utils/constances');
 
 const app = express();
 const { PORT = 3001, MONGO_BASE } = process.env;
@@ -40,7 +36,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(require('./routes/index'))
+app.use(require('./routes/index'));
 
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());
