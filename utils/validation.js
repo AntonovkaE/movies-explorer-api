@@ -19,13 +19,13 @@ module.exports.validateSignUp = celebrate({
 
 module.exports.validateId = celebrate({
   params: Joi.object().keys({
-    id: Joi.string().length(24).hex().required(),
+    id: Joi.number().required(),
   }),
 });
 
 module.exports.validateCreateMovie = celebrate({
   body: Joi.object().keys({
-    nameEN: Joi.string().required().min(2).max(30),
+    nameEN: Joi.string().required(),
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),

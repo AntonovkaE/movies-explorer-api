@@ -13,8 +13,7 @@ const { getJwtToken } = require('../utils/jwt');
 
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id).orFail(new NotFoundError(notFoundUserMessage)).then((user) => {
-    const { name, email } = user;
-    res.status(200).send({ name, email });
+    res.status(200).send(user);
   }).catch(next);
 };
 

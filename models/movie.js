@@ -51,13 +51,11 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: [2, 'It is must be 2 symbols min'],
-    maxlength: [30, 'It is must be 30 symbols max'],
   },
   nameRU: {
     type: String,
     required: true,
     minlength: [2, 'Должно быть минимум 2 символа'],
-    maxlength: [30, 'Максимум 30 символов'],
   },
   movieId: {
     type: Number,
