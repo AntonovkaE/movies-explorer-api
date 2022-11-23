@@ -1,0 +1,45 @@
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const {
+  errors,
+} = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
+const { errorHandler } = require('./middlewares/errorHandler');
+const { limiter } = require('./middlewares/limiter');
+const { localBase } = require('./utils/constances');
+
+const app = express();
+const { PORT = 3001, MONGO_BASE } = process.env;
+
+app.use(bodyParser.json()); // для собирания JSON-формата
+app.use(bodyParser.urlencoded({ extended: true }));
+
+mongoose.connect(process.env.NODE_ENV !== 'production' ? localBase : MONGO_BASE);
+app.use(cors());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+app.use(helmet());
+app.use(requestLogger);
+app.use(limiter);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
+app.use(require('./routes/index'));
+
+app.use(errorLogger); // подключаем логгер ошибок
+app.use(errors());
+app.use(errorHandler);
+
+app.listen(PORT);

@@ -12,7 +12,7 @@ const movieSchema = new mongoose.Schema({
   },
   duration: {
     type: Number,
-    required: true
+    required: true,
   },
   year: {
     type: String,
@@ -47,33 +47,20 @@ const movieSchema = new mongoose.Schema({
     ref: 'user',
     required: true,
   },
-  movieId: {
-    type: Number,
-    required: true,
-  },
   nameEN: {
     type: String,
     required: true,
     minlength: [2, 'It is must be 2 symbols min'],
-    maxlength: [30, 'It is must be 30 symbols max'],
   },
   nameRU: {
     type: String,
     required: true,
     minlength: [2, 'Должно быть минимум 2 символа'],
-    maxlength: [30, 'Максимум 30 символов'],
   },
-
-
-  // likes: [{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'user',
-  //   default: [],
-  // }],
-  // createdAt: {
-  //   type: Date,
-  //   default: Date.now(),
-  // },
+  movieId: {
+    type: Number,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('movie', movieSchema);

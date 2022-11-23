@@ -1,6 +1,10 @@
 # movies-explorer-api
 Дипломный проект в курсе Яндекс практикум
 
+Публичный IPv4 158.160.6.146
+http://api.movie.antonovskaya.nomoredomains.sbs
+
+
 [Бэкенд часть на сервере](http://api.movie.antonovskaya.nomoredomains.sbs)
 
 [Фронтенд часть](https://movie.antonovskaya.nomoredomains.sbs)
